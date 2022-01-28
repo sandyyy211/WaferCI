@@ -20,6 +20,7 @@ Data contains Wafer names and 590 columns of different sensor values for each wa
 As per DSA (Data Service Agreement) with client, we also receive a json file that contains all metadata regarding Training Data like:
 Name of the files, Length of Date value in FileName, Length of Time value in FileName, Number of Columns, Name of the Columns, and their datatype. (Screenshot from Json file is shown below)
 
+![image](https://user-images.githubusercontent.com/58501212/151582290-63eebda3-48d0-4339-bc63-25c25eff8201.png)
 
 
 Type of Data
