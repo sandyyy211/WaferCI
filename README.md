@@ -10,7 +10,7 @@ Faulty Wafer is labelled as -1.
 Correctly working Wafer is labelled as +1
 
     
-#### Data Description
+#### Data Description:
     
 At client-side data is transferred from IOT devices (sensors) though MQTT protocol to our server in AWS as multiple sets of files in batches. Frequency of this batch is Daily in production for Predicting faulty Wafers.
 Data contains Wafer names and 590 columns of different sensor values for each wafer. The last column will have the "Good/Bad" value for each wafer.
@@ -23,12 +23,12 @@ Name of the files, Length of Date value in FileName, Length of Time value in Fil
 ![image](https://user-images.githubusercontent.com/58501212/151582290-63eebda3-48d0-4339-bc63-25c25eff8201.png)
 
 
-Type of Data
+Type of Data:
 
 All Data was numeric (float) in nature. Only Wafer names was categorical data but it was of no use so removed during pre-processing.
 
 
-Pre-Processing Techniques Used
+Pre-Processing Techniques Used:
 
 •	As features/columns were having different scale, Standard Scalar was applied to scale columns to same scale.
 •	If any Column having NULL values, values were imputed using KNN imputer ((n_neighbors=3, weights='uniform')
@@ -36,7 +36,7 @@ Pre-Processing Techniques Used
 
 
 
-#### Data Validation
+#### Data Validation:
     
     In This step, we perform different sets of validation on the given set of training files.
     
@@ -58,7 +58,7 @@ Pre-Processing Techniques Used
     Null values in columns: If any of the columns in a file have all the values as NULL or missing, we discard such
     a file and move it to "Bad_Data_Folder".
     
-#### Data Insertion in Database
+#### Data Insertion in Database:
      
      Database Creation and Connection: Create a database with the given name passed. If the database is already created,
      open the connection to the database.
@@ -72,7 +72,7 @@ Pre-Processing Techniques Used
      any file has invalid data type in any of the columns, the file is not loaded in the table and is moved to 
      "Bad_Data_Folder".
      
-#### Model Training
+#### Model Training:
     
      Data Export from Db: The data in a stored database is exported as a CSV file to be used for model training.
      
