@@ -2,29 +2,39 @@
 
 #### Problem Statement:
     
-    Wafer (In electronics), also called a slice or substrate, is a thin slice of semiconductor,
-    such as a crystalline silicon (c-Si), used for fabricationof integrated circuits and in photovoltaics,
-    to manufacture solar cells.
-    
-    The inputs of various sensors for different wafers have been provided.
-    The goal is to build a machine learning model which predicts whether a wafer needs to be replaced or not
-    (i.e whether it is working or not) nased on the inputs from various sensors.
-    There are two classes: +1 and -1.
-    +1: Means that the wafer is in a working condition and it doesn't need to be replaced.
-    -1: Means that the wafer is faulty and it needa to be replaced.
+Objective here is to build an application that can effectively identify Faulty Wafers manufactured using data captured by sensors during manufacturing process.
+
+Wafer is a slice of semiconductor used for fabrication of Integrated Circuits. During production, there are sequence of sensors that captures data for each Wafer. Our objective is to Build a Machine Learning model that predicts whether a Wafer is faulty or not based on behavior of Sensers data.
+
+Faulty Wafer is labelled as -1.
+Correctly working Wafer is labelled as +1
+
     
 #### Data Description
     
-    The client will send data in multiple sets of files in batches at a given location.
-    Data will contain Wafer names and 590 columns of different sensor values for each wafer.
-    The last column will have the "Good/Bad" value for each wafer.
-    
-    Apart from training files, we laso require a "schema" file from the client, which contain all the
-    relevant information about the training files such as:
-    
-    Name of the files, Length of Date value in FileName, Length of Time value in FileName, NUmber of Columnns, 
-    Name of Columns, and their dataype.
-    
+At client-side data is transferred from IOT devices (sensors) though MQTT protocol to our server in AWS as multiple sets of files in batches. Frequency of this batch is Daily in production for Predicting faulty Wafers.
+Data contains Wafer names and 590 columns of different sensor values for each wafer. The last column will have the "Good/Bad" value for each wafer.
+"Good/Bad" column will have two unique values +1 and -1.  
+"+1" represents Bad wafer.
+"-1" represents Good Wafer. 
+As per DSA (Data Service Agreement) with client, we also receive a json file that contains all metadata regarding Training Data like:
+Name of the files, Length of Date value in FileName, Length of Time value in FileName, Number of Columns, Name of the Columns, and their datatype. (Screenshot from Json file is shown below)
+
+
+
+Type of Data
+
+All Data was numeric (float) in nature. Only Wafer names was categorical data but it was of no use so removed during pre-processing.
+
+
+Pre-Processing Techniques Used
+
+•	As features/columns were having different scale, Standard Scalar was applied to scale columns to same scale.
+•	If any Column having NULL values, values were imputed using KNN imputer ((n_neighbors=3, weights='uniform')
+•	Sometimes due to specific sensor being out of order, values for whole column is constant with 0 std deviation, such column was removed during pre-processing.
+
+
+
 #### Data Validation
     
     In This step, we perform different sets of validation on the given set of training files.
